@@ -18,7 +18,8 @@ library(stringr)
 ```{r warning=FALSE, message=FALSE, error=FALSE}
 links_listas_orgaos <- read_csv("../../data/reclamacoes-raw/links-listas-orgaos.csv")
 reclamacoes_raw <- read_csv("../../data/reclamacoes-raw/reclamacoes-raw.csv")
-experimento_de_avaliacao <- read_csv("../../data/experimento-avaliacao-humana/experimento-de-avaliacao.csv")
+experimento_de_avaliacao <- read_csv("../../data/experimento-avaliacao-humana/experimento-de-avaliacao-tds.csv")
+amostra_tds_reclamacoes <- read_csv("../../data/experimento-avaliacao-humana/amostra-tds-reclamacoes.csv")
 ```
 
 Olhando rapidamente a estrutura dos dados
@@ -61,6 +62,8 @@ for (i in 1:NROW(reclamacoes_raw)) {
 }
 ```
 
+Extraindo nome de órgão
+
 ```{r}
 
 reclamacoes_raw$nome_orgao = 0
@@ -85,4 +88,172 @@ reclamacoes_raw$nome_orgao = sapply(reclamacoes_raw$nome_orgao, pega_nome)
 ```
 
 
-## Análise dos dados de validação
+## Análise dos dados
+
+Boxplot do tamanho da reclamação (num de chars)
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+reclamacoes_raw %>%
+    ggplot() +
+    geom_jitter(aes(x=0, y=tam_reclamacao), color = "orange1", width = .3, size = 1, alpha = .5) +
+    geom_boxplot(aes(x=0, y=tam_reclamacao), color = "steelblue1", alpha = 0.7, outlier.size = 0) +
+
+    labs(title = "Distribuição do tamanho da reclamação",
+        subtitle = "Quantidade de caracteres",
+        y ="Quantidade de caracteres") +
+    theme_bw() +
+    theme(axis.title.x = element_blank()) +
+    theme(axis.ticks.x = element_blank()) +
+    theme(axis.text.x = element_blank()) +
+    theme(legend.position = "none")
+```
+
+Boxplot do tamanho da reclamação (num de palavras)
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+reclamacoes_raw %>%
+    ggplot() +
+    geom_jitter(aes(x=0, y=n_words), color = "orange1", width = .3, size = 1, alpha = .5) +
+    geom_boxplot(aes(x=0, y=n_words), color = "steelblue1", alpha = 0.7, outlier.size = 0) +
+
+    labs(title = "Distribuição do tamanho da reclamação",
+        subtitle = "Quantidade de palavras",
+        y ="Quantidade de palavras") +
+    theme_bw() +
+    theme(axis.title.x = element_blank()) +
+    theme(axis.ticks.x = element_blank()) +
+    theme(axis.text.x = element_blank()) +
+    theme(legend.position = "none")
+```
+
+Boxplot da quantidade palavras em caixa alta
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+reclamacoes_raw %>%
+    ggplot() +
+    geom_jitter(aes(x=0, y=n_upperwords), color = "orange1", width = .3, size = 1, alpha = .5) +
+    geom_boxplot(aes(x=0, y=n_upperwords), color = "deeppink4", alpha = 0.7, outlier.size = 0) +
+
+    labs(title = "Distribuição da quantidade de palavras em caixa alta",
+        y ="Quantidade de palavras em caixa alta") +
+    theme_bw() +
+    theme(axis.title.x = element_blank()) +
+    theme(axis.ticks.x = element_blank()) +
+    theme(axis.text.x = element_blank()) +
+    theme(legend.position = "none")
+```
+
+Boxplot do tamanho da reclamação (num de palavras) por órgão
+
+```{r warning=FALSE, message=FALSE, error=FALSE, fig.height=10}
+reclamacoes_raw %>%
+    ggplot() +
+    geom_jitter(aes(x=0, y=n_words), color = "greenyellow", width = .3, size = 1, alpha = 1) +
+    geom_boxplot(aes(x=0, y=n_words), color = "brown4", alpha = 0.5, outlier.size = 0) +
+    facet_wrap( ~ nome_orgao, ncol = 3) +
+    ylim(1, 600) +
+
+    labs(title = "Distribuição do tamanho da reclamação por órgão",
+        subtitle = "Quantidade de palavras",
+        y ="Quantidade de palavras") +
+    theme_bw() +
+    theme(axis.title.x = element_blank()) +
+    theme(axis.ticks.x = element_blank()) +
+    theme(axis.text.x = element_blank()) +
+    theme(legend.position = "none")
+```
+
+Boxplot da quantidade de palavras em caixa alta por órgão
+
+```{r warning=FALSE, message=FALSE, error=FALSE, fig.height=10}
+reclamacoes_raw %>%
+    ggplot() +
+    geom_jitter(aes(x=0, y=n_upperwords), color = "darkblue", width = .3, size = 1, alpha = 1) +
+    geom_boxplot(aes(x=0, y=n_upperwords), color = "gold3", alpha = 0.7, outlier.size = 0) +
+    facet_wrap( ~ nome_orgao, ncol = 3) +
+    #ylim(1, 600) +
+
+    labs(title = "Distribuição da quantidade de palavras em caixa alta por órgão",
+        y ="Quantidade de palavras") +
+    theme_bw() +
+    theme(axis.title.x = element_blank()) +
+    theme(axis.ticks.x = element_blank()) +
+    theme(axis.text.x = element_blank()) +
+    theme(legend.position = "none")
+```
+
+Boxplot da quantidade de palavras em caixa alta por órgão
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+big_df = amostra_tds_reclamacoes %>% select(id, titulo) %>%
+    filter(id %in% experimento_de_avaliacao$id_reclamação) %>%
+    left_join(experimento_de_avaliacao, by=c('id' = 'id_reclamação')) %>%
+    select(-mat_avaliador) %>%
+    left_join(reclamacoes_raw, by=c('titulo' = 'titulo'))
+```
+
+Mediana da insatisfação por reclamação
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+mediana_insatisfacao = big_df %>%
+    group_by(id) %>%
+    summarise(mediana_ins = median(insatisfação))
+
+mediana_insatisfacao %>%
+    ggplot() +
+    geom_point(aes(x=reorder(id, mediana_ins), y=mediana_ins), color = "darkblue", width = .3, size = 1, alpha = 1) +
+    #ylim(1, 600) +
+
+    labs(title = "Mediana da insatisfação por reclamação", 
+         subtitle = "Reordenação do eixo x por valor de mediana", y ="Mediana", x="Reclamacao") +
+    theme_bw() +
+    theme(axis.ticks.x = element_blank()) +
+    theme(axis.text.x = element_blank())+
+    theme(legend.position = "none")
+```
+
+Distribuição do valor da insatisfação por órgão
+
+```{r warning=FALSE, message=FALSE, error=FALSE, fig.height=10}
+big_df %>%
+    ggplot() +
+    geom_jitter(aes(x=0, y=insatisfação), color = "darkblue", width = .3, size = 1, alpha = 1) +
+    geom_boxplot(aes(x=0, y=insatisfação), color = "mediumpurple", alpha = 0.5, outlier.size = 0) +
+    facet_wrap( ~ nome_orgao, ncol = 3) +
+    #ylim(1, 600) +
+
+    labs(title = "Distribuição do valor da insatisfação por órgão",
+        y ="Valor de insatisfação atribuído por aluno/a") +
+    theme_bw() +
+    theme(axis.title.x = element_blank()) +
+    theme(axis.ticks.x = element_blank()) +
+    theme(axis.text.x = element_blank()) +
+    theme(legend.position = "none")
+```
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+
+```
+
+
+
+
+
+
+
+
+
+Outro modo de pegar o nome do orgao:
+```{r warning=FALSE, message=FALSE, error=FALSE}
+reclamacoes_raw <- reclamacoes_raw %>% 
+    mutate(
+        comprimento_reclamacao = str_length(reclamacao), 
+        nome_orgao = str_split(link, "/") %>% map_chr(~ .[[5]])
+        )
+```
+
+
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+
+```
