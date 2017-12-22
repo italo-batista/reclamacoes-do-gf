@@ -7,16 +7,18 @@ output: html_notebook
 library(tidyverse)
 library(readr)
 library(tm)
+library(stringr)
 ```
 
 
 # Análises descritiva de dados
 
-## Análise das reclamações
+## Preparando dados das reclamações
 
 ```{r warning=FALSE, message=FALSE, error=FALSE}
 links_listas_orgaos <- read_csv("../../data/reclamacoes-raw/links-listas-orgaos.csv")
 reclamacoes_raw <- read_csv("../../data/reclamacoes-raw/reclamacoes-raw.csv")
+experimento_de_avaliacao <- read_csv("../../data/experimento-avaliacao-humana/experimento-de-avaliacao.csv")
 ```
 
 Olhando rapidamente a estrutura dos dados
@@ -32,57 +34,23 @@ reclamacoes_raw$tam_titulo = nchar(reclamacoes_raw$titulo)
 reclamacoes_raw$tam_reclamacao = nchar(reclamacoes_raw$reclamacao)
 ```
 
-Removendo stopwords
-
-```{r warning=FALSE, message=FALSE, error=FALSE}
-remove_stopwords = function(raw_texto) {
-    corpus = Corpus(VectorSource(raw_texto))
-    texto = tm_map(corpus, PlainTextDocument)
-    texto = tm_map(texto, removeWords, stopwords('pt'))
-    texto = tm_map(texto, stripWhitespace)
-    #texto = tm_map(texto, removePunctuation)
-    #texto = tm_map(texto, removeNumbers)
-    #texto = tm_map(texto, content_transformer(tolower))
-    return(texto)
-}
-```
-
-Calculando tamanho de texto sem stopwords
-
-```{r warning=FALSE, message=FALSE, error=FALSE}
-reclamacoes_raw$sem_stopwords = remove_stopwords(reclamacoes_raw$reclamacao)
-```
-
 Calculando quantidade de palavras
 
 ```{r warning=FALSE, message=FALSE, error=FALSE}
-split_words = function(texto) {
-    return(strsplit(texto, " "))
-}
-
-count_words = function(texto) {
-    n_words = sapply(gregexpr("[[:alpha:]]+", texto), function(x) sum(x > 0))
-    return(n_words)
-}
-
-reclamacoes_raw$words = split_words(reclamacoes_raw$reclamacao)
-reclamacoes_raw$n_words = count_words(reclamacoes_raw$words)
+reclamacoes_raw$n_words = str_count(reclamacoes_raw$reclamacao,'\\w+')
 ```
 
 Calculando quantidade de palavras em caixa alta
 
 ```{r warning=FALSE, message=FALSE, error=FALSE}
+reclamacoes_raw$n_upperwords = 0
+N_UPPERWORDS_COL_INDEX = grep("^n_upperwords$", colnames(reclamacoes_raw))
+RECLAMACAO_COL_INDEX = grep("^reclamacao$", colnames(reclamacoes_raw))
 
-filterUpperWords = function(w) {
-    if (grepl("^[[:upper:]]+$", w)) return(TRUE) else return(FALSE)
+for (i in 1:NROW(reclamacoes_raw)) {
+    v = str_replace_all(reclamacoes_raw[i,RECLAMACAO_COL_INDEX], "[^[:alnum:]]", " ")
+    reclamacoes_raw[i,N_UPPERWORDS_COL_INDEX] = str_count(v, "\\b[A-Z]{2,}\\b")
 }
-
-uppercase_words = function(vector_of_words) {
-    return(Filter(filterUpperWords, vector_of_words))
-}
-
-reclamacoes_raw$upperwords = uppercase_words(reclamacoes_raw$words)
-reclamacoes_raw$n_upperwords = lengths(reclamacoes_raw$upperwords)
 ```
 
 ```{r}
