@@ -27,6 +27,14 @@ Olhando rapidamente a estrutura dos dados
 glimpse(reclamacoes_raw)
 ```
 
+```{r warning=FALSE, message=FALSE, error=FALSE}
+glimpse(links_listas_orgaos)
+```
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+glimpse(experimento_de_avaliacao)
+```
+
 Calculando tamanho de reclamações e de títulos
 
 ```{r warning=FALSE, message=FALSE, error=FALSE}
@@ -55,6 +63,25 @@ for (i in 1:NROW(reclamacoes_raw)) {
 
 ```{r}
 
+reclamacoes_raw$nome_orgao = 0
+LINK_COL_INDEX = grep("^link$", colnames(reclamacoes_raw))
+ORGAO_COL_INDEX = grep("^nome_orgao$", colnames(reclamacoes_raw))
+
+for (i in 1:NROW(reclamacoes_raw)) {
+    link = str_replace_all(reclamacoes_raw[i, LINK_COL_INDEX], "/", "SLICE")
+    link = str_replace_all(link, "-", "UNDERLINE")
+    link = str_replace_all(link, "[^[:alnum:]]", "&")
+    link = str_replace_all(reclamacoes_raw[i, LINK_COL_INDEX], "SLICE", "/")
+    reclamacoes_raw[i, ORGAO_COL_INDEX] = link
+    #reclamacoes_raw[i, ORGAO_COL_INDEX] = strsplit(reclamacoes_raw$nome_orgao, "/")
+}
+
+pega_nome = function(link) {
+    v = strsplit(link, "/")
+    return(v[[1]][5])
+}
+
+reclamacoes_raw$nome_orgao = sapply(reclamacoes_raw$nome_orgao, pega_nome)
 ```
 
 

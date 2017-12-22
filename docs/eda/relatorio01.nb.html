@@ -188,9 +188,10 @@ library(stringr)</code></pre>
 <h2>Preparando dados das reclamações</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlua3NfbGlzdGFzX29yZ2FvcyA8LSByZWFkX2NzdihcIi4uLy4uL2RhdGEvcmVjbGFtYWNvZXMtcmF3L2xpbmtzLWxpc3Rhcy1vcmdhb3MuY3N2XCIpXG5yZWNsYW1hY29lc19yYXcgPC0gcmVhZF9jc3YoXCIuLi8uLi9kYXRhL3JlY2xhbWFjb2VzLXJhdy9yZWNsYW1hY29lcy1yYXcuY3N2XCIpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlua3NfbGlzdGFzX29yZ2FvcyA8LSByZWFkX2NzdihcIi4uLy4uL2RhdGEvcmVjbGFtYWNvZXMtcmF3L2xpbmtzLWxpc3Rhcy1vcmdhb3MuY3N2XCIpXG5yZWNsYW1hY29lc19yYXcgPC0gcmVhZF9jc3YoXCIuLi8uLi9kYXRhL3JlY2xhbWFjb2VzLXJhdy9yZWNsYW1hY29lcy1yYXcuY3N2XCIpXG5leHBlcmltZW50b19kZV9hdmFsaWFjYW8gPC0gcmVhZF9jc3YoXCIuLi8uLi9kYXRhL2V4cGVyaW1lbnRvLWF2YWxpYWNhby1odW1hbmEvZXhwZXJpbWVudG8tZGUtYXZhbGlhY2FvLmNzdlwiKVxuYGBgIn0= -->
 <pre class="r"><code>links_listas_orgaos &lt;- read_csv(&quot;../../data/reclamacoes-raw/links-listas-orgaos.csv&quot;)
-reclamacoes_raw &lt;- read_csv(&quot;../../data/reclamacoes-raw/reclamacoes-raw.csv&quot;)</code></pre>
+reclamacoes_raw &lt;- read_csv(&quot;../../data/reclamacoes-raw/reclamacoes-raw.csv&quot;)
+experimento_de_avaliacao &lt;- read_csv(&quot;../../data/experimento-avaliacao-humana/experimento-de-avaliacao.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -207,6 +208,33 @@ $ orgao      &lt;chr&gt; &quot;http://http://www.cultura.gov.br&quot;, &quot;htt
 $ link       &lt;chr&gt; &quot;https://cidadao.reclameaqui.com.br/277684/ministerio-da-cultura/ministerio-da-cultura-libera-verba-para-biografia-da-cantora/&quot;, &quot;https://cidad...
 $ titulo     &lt;chr&gt; &quot;Ministério da cultura libera verba para biografia da cantora Claudia Leitte&quot;, &quot;Fatima Tayjen&quot;, &quot;Falta de energia constante e diária&quot;, &quot;SAMSUSU...
 $ reclamacao &lt;chr&gt; &quot;\r\n        Indignada com a liberação da verba de R$365.000,00 para a publicação de uma biografia da cantora Cláudia Leitte. Reitero que de ma...</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2xpbXBzZShsaW5rc19saXN0YXNfb3JnYW9zKVxuYGBgIn0= -->
+<pre class="r"><code>glimpse(links_listas_orgaos)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiT2JzZXJ2YXRpb25zOiA4NlxuVmFyaWFibGVzOiAyXG4kIG9yZ2FvIDxjaHI+IFwiTWluaXN0w6lyaW8gZGEgRmF6ZW5kYVwiLCBcIk1pbmlzdMOpcmlvIGRhIEludGVncmHDp8OjbyBOYS4uLlwiLCBcIk1pbmlzdMOpcmlvIGRvIERlc2Vudm9sdmltZW50by4uLlwiLCBcIk1pbmlzdMOpcmlvIGRvIEVzcG9ydGVcIiwgXCJNaW5pc3TDqXJpbyBkbyBQbGFuZWphbWVudG9cIi4uLlxuJCBsaW5rICA8Y2hyPiBcImh0dHBzOi8vY2lkYWRhby5yZWNsYW1lYXF1aS5jb20uYnIvaW5kaWNlcy9saXN0YV9yZWNsYW1hY29lcy8/dHA9OTQwM2Y0YzhjZDVhZjYxYzQ4NTU0MWU5NDQ0OTUwYzA2OWM3OWZmYSZzdWJ0cD1jOTJhOWJjMzQxZDczOTA0NGZmNTQwMDY2MWQ0NGE2MGE4MC4uLlxuIn0= -->
+<pre><code>Observations: 86
+Variables: 2
+$ orgao &lt;chr&gt; &quot;Ministério da Fazenda&quot;, &quot;Ministério da Integração Na...&quot;, &quot;Ministério do Desenvolvimento...&quot;, &quot;Ministério do Esporte&quot;, &quot;Ministério do Planejamento&quot;...
+$ link  &lt;chr&gt; &quot;https://cidadao.reclameaqui.com.br/indices/lista_reclamacoes/?tp=9403f4c8cd5af61c485541e9444950c069c79ffa&amp;subtp=c92a9bc341d739044ff5400661d44a60a80...</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2xpbXBzZShleHBlcmltZW50b19kZV9hdmFsaWFjYW8pXG5gYGAifQ== -->
+<pre class="r"><code>glimpse(experimento_de_avaliacao)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiT2JzZXJ2YXRpb25zOiAxNzhcblZhcmlhYmxlczogM1xuJCBgU3VhIG1hdHLDrWN1bGFgICAgIDxpbnQ+IDExNjExMDA4OSwgMTE2MTEwMDg5LCAxMTYxMTAwODksIDExNjExMDA4OSwgMTE2MTEwMDg5LCAxMTYxMTAwODksIDExNjExMDA4OSwgMTE2MTEwMDg5LCAxMTMyMTA4OTMsIDExMzIxMDg5MywgMTEzMjEwODkzLCAxMTMyMTA4OTMsIDExMy4uLlxuJCBgSWQgZGEgcmVjbGFtYcOnw6NvYCA8aW50PiAxMywgNywgOSwgMTIsIDE0LCAxNSwgMiwgNiwgNywgOSwgMTIsIDE0LCA4LCAxMSwgMiwgMSwgNiwgMTIsIDksIDE0LCAxLCAyLCA2LCA3LCA4LCA5LCAxMCwgMTEsIDEyLCAxMywgMTQsIDE1LCAxLCAyLCA2LCAxNSwgNywgMTIsIDcsIDkuLi5cbiQgSW5zYXRpc2Zhw6fDo28gICAgICAgPGRibD4gNSwgNCwgMywgNCwgMywgNCwgMiwgNSwgMywgMiwgMiwgMywgNCwgNCwgMiwgNCwgNSwgMSwgMywgMywgNSwgNCwgNSwgMywgNCwgMSwgMiwgNSwgMiwgNSwgNCwgNCwgNSwgMiwgNSwgMywgMiwgMiwgMiwgMywgNCwgMywgMiwgMiwgNCwgLi4uXG4ifQ== -->
+<pre><code>Observations: 178
+Variables: 3
+$ `Sua matrícula`    &lt;int&gt; 116110089, 116110089, 116110089, 116110089, 116110089, 116110089, 116110089, 116110089, 113210893, 113210893, 113210893, 113210893, 113...
+$ `Id da reclamação` &lt;int&gt; 13, 7, 9, 12, 14, 15, 2, 6, 7, 9, 12, 14, 8, 11, 2, 1, 6, 12, 9, 14, 1, 2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1, 2, 6, 15, 7, 12, 7, 9...
+$ Insatisfação       &lt;dbl&gt; 5, 4, 3, 4, 3, 4, 2, 5, 3, 2, 2, 3, 4, 4, 2, 4, 5, 1, 3, 3, 5, 4, 5, 3, 4, 1, 2, 5, 2, 5, 4, 4, 5, 2, 5, 3, 2, 2, 2, 3, 4, 3, 2, 2, 4, ...</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -243,6 +271,348 @@ for (i in 1:NROW(reclamacoes_raw)) {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVjbGFtYWNvZXNfcmF3JG5vbWVfb3JnYW8gPSAwXG5MSU5LX0NPTF9JTkRFWCA9IGdyZXAoXCJebGluayRcIiwgY29sbmFtZXMocmVjbGFtYWNvZXNfcmF3KSlcbk9SR0FPX0NPTF9JTkRFWCA9IGdyZXAoXCJebm9tZV9vcmdhbyRcIiwgY29sbmFtZXMocmVjbGFtYWNvZXNfcmF3KSlcbmZvciAoaSBpbiAxOk5ST1cocmVjbGFtYWNvZXNfcmF3KSkge1xuICAgIGxpbmsgPSBzdHJfcmVwbGFjZV9hbGwocmVjbGFtYWNvZXNfcmF3W2ksIExJTktfQ09MX0lOREVYXSwgXCIvXCIsIFwiU0xJQ0VcIilcbiAgICBsaW5rID0gc3RyX3JlcGxhY2VfYWxsKGxpbmssIFwiLVwiLCBcIlVOREVSTElORVwiKVxuICAgIGxpbmsgPSBzdHJfcmVwbGFjZV9hbGwobGluaywgXCJbXls6YWxudW06XV1cIiwgXCImXCIpXG4gICAgbGluayA9IHN0cl9yZXBsYWNlX2FsbChyZWNsYW1hY29lc19yYXdbaSwgTElOS19DT0xfSU5ERVhdLCBcIlNMSUNFXCIsIFwiL1wiKVxuICAgIHJlY2xhbWFjb2VzX3Jhd1tpLCBPUkdBT19DT0xfSU5ERVhdID0gbGlua1xuICAgICNyZWNsYW1hY29lc19yYXdbaSwgT1JHQU9fQ09MX0lOREVYXSA9IHN0cnNwbGl0KHJlY2xhbWFjb2VzX3JhdyRub21lX29yZ2FvLCBcIi9cIilcbn1cbnBlZ2Ffbm9tZSA9IGZ1bmN0aW9uKGxpbmspIHtcbiAgICB2ID0gc3Ryc3BsaXQobGluaywgXCIvXCIpXG4gICAgcHJpbnQodltbMV1dWzVdKVxuICAgIHJldHVybignb2knKVxufVxucmVjbGFtYWNvZXNfcmF3JG5vbWVfb3JnYW8gPSBzYXBwbHkocmVjbGFtYWNvZXNfcmF3JG5vbWVfb3JnYW8sIHBlZ2Ffbm9tZSlcblxuYGBgIn0= -->
+<pre class="r"><code>reclamacoes_raw$nome_orgao = 0
+LINK_COL_INDEX = grep(&quot;^link$&quot;, colnames(reclamacoes_raw))
+ORGAO_COL_INDEX = grep(&quot;^nome_orgao$&quot;, colnames(reclamacoes_raw))
+for (i in 1:NROW(reclamacoes_raw)) {
+    link = str_replace_all(reclamacoes_raw[i, LINK_COL_INDEX], &quot;/&quot;, &quot;SLICE&quot;)
+    link = str_replace_all(link, &quot;-&quot;, &quot;UNDERLINE&quot;)
+    link = str_replace_all(link, &quot;[^[:alnum:]]&quot;, &quot;&amp;&quot;)
+    link = str_replace_all(reclamacoes_raw[i, LINK_COL_INDEX], &quot;SLICE&quot;, &quot;/&quot;)
+    reclamacoes_raw[i, ORGAO_COL_INDEX] = link
+    #reclamacoes_raw[i, ORGAO_COL_INDEX] = strsplit(reclamacoes_raw$nome_orgao, &quot;/&quot;)
+}
+pega_nome = function(link) {
+    v = strsplit(link, &quot;/&quot;)
+    print(v[[1]][5])
+    return('oi')
+}
+reclamacoes_raw$nome_orgao = sapply(reclamacoes_raw$nome_orgao, pega_nome)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwibWluaXN0ZXJpby1kYS1jdWx0dXJhXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtY3VsdHVyYVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLWN1bHR1cmFcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1jdWx0dXJhXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtY3VsdHVyYVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLWN1bHR1cmFcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1jdWx0dXJhXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtY3VsdHVyYVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLWN1bHR1cmFcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1jdWx0dXJhXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtY3VsdHVyYVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLWN1bHR1cmFcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1jdWx0dXJhXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtY3VsdHVyYVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLWN1bHR1cmFcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1jdWx0dXJhXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtY3VsdHVyYVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLWN1bHR1cmFcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1jdWx0dXJhXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtY3VsdHVyYVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhcy1jb211bmljYWNvZXNcIlxuWzFdIFwibWluaXN0ZXJpby1kYXMtY29tdW5pY2Fjb2VzXCJcblsxXSBcIm1pbmlzdGVyaW8tZGFzLWNvbXVuaWNhY29lc1wiXG5bMV0gXCJtaW5pc3RlcmlvLWRhcy1jb211bmljYWNvZXNcIlxuWzFdIFwibWluaXN0ZXJpby1kYXMtY29tdW5pY2Fjb2VzXCJcblsxXSBcIm1pbmlzdGVyaW8tZGFzLWNvbXVuaWNhY29lc1wiXG5bMV0gXCJtaW5pc3RlcmlvLWRhcy1jb211bmljYWNvZXNcIlxuWzFdIFwibWluaXN0ZXJpby1kYXMtY29tdW5pY2Fjb2VzXCJcblsxXSBcIm1pbmlzdGVyaW8tZGFzLWNvbXVuaWNhY29lc1wiXG5bMV0gXCJtaW5pc3RlcmlvLWRhcy1jb211bmljYWNvZXNcIlxuWzFdIFwibWluaXN0ZXJpby1kYXMtY29tdW5pY2Fjb2VzXCJcblsxXSBcIm1pbmlzdGVyaW8tZGFzLWNvbXVuaWNhY29lc1wiXG5bMV0gXCJtaW5pc3RlcmlvLWRhcy1jb211bmljYWNvZXNcIlxuWzFdIFwibWluaXN0ZXJpby1kYXMtY29tdW5pY2Fjb2VzXCJcblsxXSBcIm1pbmlzdGVyaW8tZGFzLWNvbXVuaWNhY29lc1wiXG5bMV0gXCJtaW5pc3RlcmlvLWRhcy1jb211bmljYWNvZXNcIlxuWzFdIFwibWluaXN0ZXJpby1kYXMtY29tdW5pY2Fjb2VzXCJcblsxXSBcIm1pbmlzdGVyaW8tZGFzLWNvbXVuaWNhY29lc1wiXG5bMV0gXCJtaW5pc3RlcmlvLWRhcy1jb211bmljYWNvZXNcIlxuWzFdIFwibWluaXN0ZXJpby1kYXMtY29tdW5pY2Fjb2VzXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcIm1pbmlzdGVyaW8tZG8tcGxhbmVqYW1lbnRvXCJcblsxXSBcImluc3MtbWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwiaW5zcy1taW5pc3RlcmlvLWRhLXByZXZpZGVuY2lhLXNvY2lhbFwiXG5bMV0gXCJpbnNzLW1pbmlzdGVyaW8tZGEtcHJldmlkZW5jaWEtc29jaWFsXCJcblsxXSBcImluc3MtbWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwiaW5zcy1taW5pc3RlcmlvLWRhLXByZXZpZGVuY2lhLXNvY2lhbFwiXG5bMV0gXCJpbnNzLW1pbmlzdGVyaW8tZGEtcHJldmlkZW5jaWEtc29jaWFsXCJcblsxXSBcImluc3MtbWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwiaW5zcy1taW5pc3RlcmlvLWRhLXByZXZpZGVuY2lhLXNvY2lhbFwiXG5bMV0gXCJpbnNzLW1pbmlzdGVyaW8tZGEtcHJldmlkZW5jaWEtc29jaWFsXCJcblsxXSBcImluc3MtbWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwiaW5zcy1taW5pc3RlcmlvLWRhLXByZXZpZGVuY2lhLXNvY2lhbFwiXG5bMV0gXCJpbnNzLW1pbmlzdGVyaW8tZGEtcHJldmlkZW5jaWEtc29jaWFsXCJcblsxXSBcImluc3MtbWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwiaW5zcy1taW5pc3RlcmlvLWRhLXByZXZpZGVuY2lhLXNvY2lhbFwiXG5bMV0gXCJpbnNzLW1pbmlzdGVyaW8tZGEtcHJldmlkZW5jaWEtc29jaWFsXCJcblsxXSBcImluc3MtbWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwiaW5zcy1taW5pc3RlcmlvLWRhLXByZXZpZGVuY2lhLXNvY2lhbFwiXG5bMV0gXCJpbnNzLW1pbmlzdGVyaW8tZGEtcHJldmlkZW5jaWEtc29jaWFsXCJcblsxXSBcImluc3MtbWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwiaW5zcy1taW5pc3RlcmlvLWRhLXByZXZpZGVuY2lhLXNvY2lhbFwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJhbnAtYWdlbmNpYS1uYWNpb25hbC1kby1wZXRyb2xlby1nYXMtbmF0dXJhbC1lLWJpb2NvbWJ1c3RpdlwiXG5bMV0gXCJwZi1kZXBhcnRhbWVudG8tZGUtcG9saWNpYS1mZWRlcmFsXCJcblsxXSBcInBmLWRlcGFydGFtZW50by1kZS1wb2xpY2lhLWZlZGVyYWxcIlxuWzFdIFwicGYtZGVwYXJ0YW1lbnRvLWRlLXBvbGljaWEtZmVkZXJhbFwiXG5bMV0gXCJwZi1kZXBhcnRhbWVudG8tZGUtcG9saWNpYS1mZWRlcmFsXCJcblsxXSBcInBmLWRlcGFydGFtZW50by1kZS1wb2xpY2lhLWZlZGVyYWxcIlxuWzFdIFwicGYtZGVwYXJ0YW1lbnRvLWRlLXBvbGljaWEtZmVkZXJhbFwiXG5bMV0gXCJwZi1kZXBhcnRhbWVudG8tZGUtcG9saWNpYS1mZWRlcmFsXCJcblsxXSBcInBmLWRlcGFydGFtZW50by1kZS1wb2xpY2lhLWZlZGVyYWxcIlxuWzFdIFwicGYtZGVwYXJ0YW1lbnRvLWRlLXBvbGljaWEtZmVkZXJhbFwiXG5bMV0gXCJwZi1kZXBhcnRhbWVudG8tZGUtcG9saWNpYS1mZWRlcmFsXCJcblsxXSBcInBmLWRlcGFydGFtZW50by1kZS1wb2xpY2lhLWZlZGVyYWxcIlxuWzFdIFwicGYtZGVwYXJ0YW1lbnRvLWRlLXBvbGljaWEtZmVkZXJhbFwiXG5bMV0gXCJwZi1kZXBhcnRhbWVudG8tZGUtcG9saWNpYS1mZWRlcmFsXCJcblsxXSBcInBmLWRlcGFydGFtZW50by1kZS1wb2xpY2lhLWZlZGVyYWxcIlxuWzFdIFwicGYtZGVwYXJ0YW1lbnRvLWRlLXBvbGljaWEtZmVkZXJhbFwiXG5bMV0gXCJwZi1kZXBhcnRhbWVudG8tZGUtcG9saWNpYS1mZWRlcmFsXCJcblsxXSBcInBmLWRlcGFydGFtZW50by1kZS1wb2xpY2lhLWZlZGVyYWxcIlxuWzFdIFwicGYtZGVwYXJ0YW1lbnRvLWRlLXBvbGljaWEtZmVkZXJhbFwiXG5bMV0gXCJwZi1kZXBhcnRhbWVudG8tZGUtcG9saWNpYS1mZWRlcmFsXCJcblsxXSBcInBmLWRlcGFydGFtZW50by1kZS1wb2xpY2lhLWZlZGVyYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1wcmV2aWRlbmNpYS1zb2NpYWxcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwiYW52aXNhLWFnZW5jaWEtbmFjaW9uYWwtZGUtdmlnaWxhbmNpYS1zYW5pdGFyaWFcIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwidW5pZmVzcC11bml2ZXJzaWRhZGUtZmVkZXJhbC1kZS1zYW8tcGF1bG9cIlxuWzFdIFwic3RmLXN1cHJlbW8tdHJpYnVuYWwtZmVkZXJhbFwiXG5bMV0gXCJzdGYtc3VwcmVtby10cmlidW5hbC1mZWRlcmFsXCJcblsxXSBcInN0Zi1zdXByZW1vLXRyaWJ1bmFsLWZlZGVyYWxcIlxuWzFdIFwic3RmLXN1cHJlbW8tdHJpYnVuYWwtZmVkZXJhbFwiXG5bMV0gXCJzdGYtc3VwcmVtby10cmlidW5hbC1mZWRlcmFsXCJcblsxXSBcInN0Zi1zdXByZW1vLXRyaWJ1bmFsLWZlZGVyYWxcIlxuWzFdIFwic3RmLXN1cHJlbW8tdHJpYnVuYWwtZmVkZXJhbFwiXG5bMV0gXCJzdGYtc3VwcmVtby10cmlidW5hbC1mZWRlcmFsXCJcblsxXSBcInN0Zi1zdXByZW1vLXRyaWJ1bmFsLWZlZGVyYWxcIlxuWzFdIFwic3RmLXN1cHJlbW8tdHJpYnVuYWwtZmVkZXJhbFwiXG5bMV0gXCJzdGYtc3VwcmVtby10cmlidW5hbC1mZWRlcmFsXCJcblsxXSBcInN0Zi1zdXByZW1vLXRyaWJ1bmFsLWZlZGVyYWxcIlxuWzFdIFwic3RmLXN1cHJlbW8tdHJpYnVuYWwtZmVkZXJhbFwiXG5bMV0gXCJzdGYtc3VwcmVtby10cmlidW5hbC1mZWRlcmFsXCJcblsxXSBcInN0Zi1zdXByZW1vLXRyaWJ1bmFsLWZlZGVyYWxcIlxuWzFdIFwic3RmLXN1cHJlbW8tdHJpYnVuYWwtZmVkZXJhbFwiXG5bMV0gXCJzdGYtc3VwcmVtby10cmlidW5hbC1mZWRlcmFsXCJcblsxXSBcInN0Zi1zdXByZW1vLXRyaWJ1bmFsLWZlZGVyYWxcIlxuWzFdIFwic3RmLXN1cHJlbW8tdHJpYnVuYWwtZmVkZXJhbFwiXG5bMV0gXCJzdGYtc3VwcmVtby10cmlidW5hbC1mZWRlcmFsXCJcblsxXSBcInNlcnByby1zZXJ2aWNvLWZlZGVyYWwtZGUtcHJvY2Vzc2FtZW50by1kZS1kYWRvc1wiXG5bMV0gXCJzZXJwcm8tc2Vydmljby1mZWRlcmFsLWRlLXByb2Nlc3NhbWVudG8tZGUtZGFkb3NcIlxuWzFdIFwic2VycHJvLXNlcnZpY28tZmVkZXJhbC1kZS1wcm9jZXNzYW1lbnRvLWRlLWRhZG9zXCJcblsxXSBcInNlcnByby1zZXJ2aWNvLWZlZGVyYWwtZGUtcHJvY2Vzc2FtZW50by1kZS1kYWRvc1wiXG5bMV0gXCJzZXJwcm8tc2Vydmljby1mZWRlcmFsLWRlLXByb2Nlc3NhbWVudG8tZGUtZGFkb3NcIlxuWzFdIFwic2VycHJvLXNlcnZpY28tZmVkZXJhbC1kZS1wcm9jZXNzYW1lbnRvLWRlLWRhZG9zXCJcblsxXSBcInNlcnByby1zZXJ2aWNvLWZlZGVyYWwtZGUtcHJvY2Vzc2FtZW50by1kZS1kYWRvc1wiXG5bMV0gXCJzZXJwcm8tc2Vydmljby1mZWRlcmFsLWRlLXByb2Nlc3NhbWVudG8tZGUtZGFkb3NcIlxuWzFdIFwic2VycHJvLXNlcnZpY28tZmVkZXJhbC1kZS1wcm9jZXNzYW1lbnRvLWRlLWRhZG9zXCJcblsxXSBcInNlcnByby1zZXJ2aWNvLWZlZGVyYWwtZGUtcHJvY2Vzc2FtZW50by1kZS1kYWRvc1wiXG5bMV0gXCJzZXJwcm8tc2Vydmljby1mZWRlcmFsLWRlLXByb2Nlc3NhbWVudG8tZGUtZGFkb3NcIlxuWzFdIFwic2VycHJvLXNlcnZpY28tZmVkZXJhbC1kZS1wcm9jZXNzYW1lbnRvLWRlLWRhZG9zXCJcblsxXSBcInNlcnByby1zZXJ2aWNvLWZlZGVyYWwtZGUtcHJvY2Vzc2FtZW50by1kZS1kYWRvc1wiXG5bMV0gXCJzZXJwcm8tc2Vydmljby1mZWRlcmFsLWRlLXByb2Nlc3NhbWVudG8tZGUtZGFkb3NcIlxuWzFdIFwic2VycHJvLXNlcnZpY28tZmVkZXJhbC1kZS1wcm9jZXNzYW1lbnRvLWRlLWRhZG9zXCJcblsxXSBcInNlcnByby1zZXJ2aWNvLWZlZGVyYWwtZGUtcHJvY2Vzc2FtZW50by1kZS1kYWRvc1wiXG5bMV0gXCJzZXJwcm8tc2Vydmljby1mZWRlcmFsLWRlLXByb2Nlc3NhbWVudG8tZGUtZGFkb3NcIlxuWzFdIFwic2VycHJvLXNlcnZpY28tZmVkZXJhbC1kZS1wcm9jZXNzYW1lbnRvLWRlLWRhZG9zXCJcblsxXSBcInNlcnByby1zZXJ2aWNvLWZlZGVyYWwtZGUtcHJvY2Vzc2FtZW50by1kZS1kYWRvc1wiXG5bMV0gXCJzZXJwcm8tc2Vydmljby1mZWRlcmFsLWRlLXByb2Nlc3NhbWVudG8tZGUtZGFkb3NcIlxuWzFdIFwicHJmLWRlcGFydGFtZW50by1kZS1wb2xpY2lhLXJvZG92aWFyaWEtZmVkZXJhbFwiXG5bMV0gXCJwcmYtZGVwYXJ0YW1lbnRvLWRlLXBvbGljaWEtcm9kb3ZpYXJpYS1mZWRlcmFsXCJcblsxXSBcInByZi1kZXBhcnRhbWVudG8tZGUtcG9saWNpYS1yb2RvdmlhcmlhLWZlZGVyYWxcIlxuWzFdIFwicHJmLWRlcGFydGFtZW50by1kZS1wb2xpY2lhLXJvZG92aWFyaWEtZmVkZXJhbFwiXG5bMV0gXCJwcmYtZGVwYXJ0YW1lbnRvLWRlLXBvbGljaWEtcm9kb3ZpYXJpYS1mZWRlcmFsXCJcblsxXSBcInByZi1kZXBhcnRhbWVudG8tZGUtcG9saWNpYS1yb2RvdmlhcmlhLWZlZGVyYWxcIlxuWzFdIFwicHJmLWRlcGFydGFtZW50by1kZS1wb2xpY2lhLXJvZG92aWFyaWEtZmVkZXJhbFwiXG5bMV0gXCJwcmYtZGVwYXJ0YW1lbnRvLWRlLXBvbGljaWEtcm9kb3ZpYXJpYS1mZWRlcmFsXCJcblsxXSBcInByZi1kZXBhcnRhbWVudG8tZGUtcG9saWNpYS1yb2RvdmlhcmlhLWZlZGVyYWxcIlxuWzFdIFwicHJmLWRlcGFydGFtZW50by1kZS1wb2xpY2lhLXJvZG92aWFyaWEtZmVkZXJhbFwiXG5bMV0gXCJwcmYtZGVwYXJ0YW1lbnRvLWRlLXBvbGljaWEtcm9kb3ZpYXJpYS1mZWRlcmFsXCJcblsxXSBcInByZi1kZXBhcnRhbWVudG8tZGUtcG9saWNpYS1yb2RvdmlhcmlhLWZlZGVyYWxcIlxuWzFdIFwicHJmLWRlcGFydGFtZW50by1kZS1wb2xpY2lhLXJvZG92aWFyaWEtZmVkZXJhbFwiXG5bMV0gXCJwcmYtZGVwYXJ0YW1lbnRvLWRlLXBvbGljaWEtcm9kb3ZpYXJpYS1mZWRlcmFsXCJcblsxXSBcInByZi1kZXBhcnRhbWVudG8tZGUtcG9saWNpYS1yb2RvdmlhcmlhLWZlZGVyYWxcIlxuWzFdIFwicHJmLWRlcGFydGFtZW50by1kZS1wb2xpY2lhLXJvZG92aWFyaWEtZmVkZXJhbFwiXG5bMV0gXCJwcmYtZGVwYXJ0YW1lbnRvLWRlLXBvbGljaWEtcm9kb3ZpYXJpYS1mZWRlcmFsXCJcblsxXSBcInByZi1kZXBhcnRhbWVudG8tZGUtcG9saWNpYS1yb2RvdmlhcmlhLWZlZGVyYWxcIlxuWzFdIFwicHJmLWRlcGFydGFtZW50by1kZS1wb2xpY2lhLXJvZG92aWFyaWEtZmVkZXJhbFwiXG5bMV0gXCJwcmYtZGVwYXJ0YW1lbnRvLWRlLXBvbGljaWEtcm9kb3ZpYXJpYS1mZWRlcmFsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcImFuYWMtYWdlbmNpYS1uYWNpb25hbC1kZS1hdmlhY2FvLWNpdmlsXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtZmF6ZW5kYVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLWZhemVuZGFcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1mYXplbmRhXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtZmF6ZW5kYVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLWZhemVuZGFcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1mYXplbmRhXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtZmF6ZW5kYVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLWZhemVuZGFcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1mYXplbmRhXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtZmF6ZW5kYVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLWZhemVuZGFcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1mYXplbmRhXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtZmF6ZW5kYVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLWZhemVuZGFcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1mYXplbmRhXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtZmF6ZW5kYVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLWZhemVuZGFcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1mYXplbmRhXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtZmF6ZW5kYVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLWZhemVuZGFcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwiYW5hLWFnZW5jaWEtbmFjaW9uYWwtZGUtYWd1YXNcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1zYXVkZVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLXNhdWRlXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtc2F1ZGVcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1zYXVkZVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLXNhdWRlXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtc2F1ZGVcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1zYXVkZVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLXNhdWRlXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtc2F1ZGVcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1zYXVkZVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLXNhdWRlXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtc2F1ZGVcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1zYXVkZVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLXNhdWRlXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtc2F1ZGVcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1zYXVkZVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLXNhdWRlXCJcblsxXSBcIm1pbmlzdGVyaW8tZGEtc2F1ZGVcIlxuWzFdIFwibWluaXN0ZXJpby1kYS1zYXVkZVwiXG5bMV0gXCJtaW5pc3RlcmlvLWRhLXNhdWRlXCJcbiJ9 -->
+<pre><code>[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-da-cultura&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-das-comunicacoes&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;ministerio-do-planejamento&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;inss-ministerio-da-previdencia-social&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;anp-agencia-nacional-do-petroleo-gas-natural-e-biocombustiv&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;pf-departamento-de-policia-federal&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;ministerio-da-previdencia-social&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;anvisa-agencia-nacional-de-vigilancia-sanitaria&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;unifesp-universidade-federal-de-sao-paulo&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;stf-supremo-tribunal-federal&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;serpro-servico-federal-de-processamento-de-dados&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;prf-departamento-de-policia-rodoviaria-federal&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;anac-agencia-nacional-de-aviacao-civil&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ministerio-da-fazenda&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ana-agencia-nacional-de-aguas&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;
+[1] &quot;ministerio-da-saude&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -252,7 +622,7 @@ for (i in 1:NROW(reclamacoes_raw)) {
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3Igd2FybmluZz1GQUxTRSwgbWVzc2FnZT1GQUxTRSwgZXJyb3I9RkFMU0V9CmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KHJlYWRyKQpsaWJyYXJ5KHRtKQpsaWJyYXJ5KHN0cmluZ3IpCmBgYAoKCiMgQW7DoWxpc2VzIGRlc2NyaXRpdmEgZGUgZGFkb3MKCiMjIFByZXBhcmFuZG8gZGFkb3MgZGFzIHJlY2xhbWHDp8O1ZXMKCmBgYHtyIHdhcm5pbmc9RkFMU0UsIG1lc3NhZ2U9RkFMU0UsIGVycm9yPUZBTFNFfQpsaW5rc19saXN0YXNfb3JnYW9zIDwtIHJlYWRfY3N2KCIuLi8uLi9kYXRhL3JlY2xhbWFjb2VzLXJhdy9saW5rcy1saXN0YXMtb3JnYW9zLmNzdiIpCnJlY2xhbWFjb2VzX3JhdyA8LSByZWFkX2NzdigiLi4vLi4vZGF0YS9yZWNsYW1hY29lcy1yYXcvcmVjbGFtYWNvZXMtcmF3LmNzdiIpCmV4cGVyaW1lbnRvX2RlX2F2YWxpYWNhbyA8LSByZWFkX2NzdigiLi4vLi4vZGF0YS9leHBlcmltZW50by1hdmFsaWFjYW8taHVtYW5hL2V4cGVyaW1lbnRvLWRlLWF2YWxpYWNhby5jc3YiKQpgYGAKCk9saGFuZG8gcmFwaWRhbWVudGUgYSBlc3RydXR1cmEgZG9zIGRhZG9zCgpgYGB7ciB3YXJuaW5nPUZBTFNFLCBtZXNzYWdlPUZBTFNFLCBlcnJvcj1GQUxTRX0KZ2xpbXBzZShyZWNsYW1hY29lc19yYXcpCmBgYAoKQ2FsY3VsYW5kbyB0YW1hbmhvIGRlIHJlY2xhbWHDp8O1ZXMgZSBkZSB0w610dWxvcwoKYGBge3Igd2FybmluZz1GQUxTRSwgbWVzc2FnZT1GQUxTRSwgZXJyb3I9RkFMU0V9CnJlY2xhbWFjb2VzX3JhdyR0YW1fdGl0dWxvID0gbmNoYXIocmVjbGFtYWNvZXNfcmF3JHRpdHVsbykKcmVjbGFtYWNvZXNfcmF3JHRhbV9yZWNsYW1hY2FvID0gbmNoYXIocmVjbGFtYWNvZXNfcmF3JHJlY2xhbWFjYW8pCmBgYAoKQ2FsY3VsYW5kbyBxdWFudGlkYWRlIGRlIHBhbGF2cmFzCgpgYGB7ciB3YXJuaW5nPUZBTFNFLCBtZXNzYWdlPUZBTFNFLCBlcnJvcj1GQUxTRX0KcmVjbGFtYWNvZXNfcmF3JG5fd29yZHMgPSBzdHJfY291bnQocmVjbGFtYWNvZXNfcmF3JHJlY2xhbWFjYW8sJ1xcdysnKQpgYGAKCkNhbGN1bGFuZG8gcXVhbnRpZGFkZSBkZSBwYWxhdnJhcyBlbSBjYWl4YSBhbHRhCgpgYGB7ciB3YXJuaW5nPUZBTFNFLCBtZXNzYWdlPUZBTFNFLCBlcnJvcj1GQUxTRX0KcmVjbGFtYWNvZXNfcmF3JG5fdXBwZXJ3b3JkcyA9IDAKTl9VUFBFUldPUkRTX0NPTF9JTkRFWCA9IGdyZXAoIl5uX3VwcGVyd29yZHMkIiwgY29sbmFtZXMocmVjbGFtYWNvZXNfcmF3KSkKUkVDTEFNQUNBT19DT0xfSU5ERVggPSBncmVwKCJecmVjbGFtYWNhbyQiLCBjb2xuYW1lcyhyZWNsYW1hY29lc19yYXcpKQoKZm9yIChpIGluIDE6TlJPVyhyZWNsYW1hY29lc19yYXcpKSB7CiAgICB2ID0gc3RyX3JlcGxhY2VfYWxsKHJlY2xhbWFjb2VzX3Jhd1tpLFJFQ0xBTUFDQU9fQ09MX0lOREVYXSwgIlteWzphbG51bTpdXSIsICIgIikKICAgIHJlY2xhbWFjb2VzX3Jhd1tpLE5fVVBQRVJXT1JEU19DT0xfSU5ERVhdID0gc3RyX2NvdW50KHYsICJcXGJbQS1aXXsyLH1cXGIiKQp9CmBgYAoKYGBge3J9CgpgYGAKCgojIyBBbsOhbGlzZSBkb3MgZGFkb3MgZGUgdmFsaWRhw6fDo28K</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3Igd2FybmluZz1GQUxTRSwgbWVzc2FnZT1GQUxTRSwgZXJyb3I9RkFMU0V9CmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KHJlYWRyKQpsaWJyYXJ5KHRtKQpsaWJyYXJ5KHN0cmluZ3IpCmBgYAoKCiMgQW7DoWxpc2VzIGRlc2NyaXRpdmEgZGUgZGFkb3MKCiMjIFByZXBhcmFuZG8gZGFkb3MgZGFzIHJlY2xhbWHDp8O1ZXMKCmBgYHtyIHdhcm5pbmc9RkFMU0UsIG1lc3NhZ2U9RkFMU0UsIGVycm9yPUZBTFNFfQpsaW5rc19saXN0YXNfb3JnYW9zIDwtIHJlYWRfY3N2KCIuLi8uLi9kYXRhL3JlY2xhbWFjb2VzLXJhdy9saW5rcy1saXN0YXMtb3JnYW9zLmNzdiIpCnJlY2xhbWFjb2VzX3JhdyA8LSByZWFkX2NzdigiLi4vLi4vZGF0YS9yZWNsYW1hY29lcy1yYXcvcmVjbGFtYWNvZXMtcmF3LmNzdiIpCmV4cGVyaW1lbnRvX2RlX2F2YWxpYWNhbyA8LSByZWFkX2NzdigiLi4vLi4vZGF0YS9leHBlcmltZW50by1hdmFsaWFjYW8taHVtYW5hL2V4cGVyaW1lbnRvLWRlLWF2YWxpYWNhby5jc3YiKQpgYGAKCk9saGFuZG8gcmFwaWRhbWVudGUgYSBlc3RydXR1cmEgZG9zIGRhZG9zCgpgYGB7ciB3YXJuaW5nPUZBTFNFLCBtZXNzYWdlPUZBTFNFLCBlcnJvcj1GQUxTRX0KZ2xpbXBzZShyZWNsYW1hY29lc19yYXcpCmBgYAoKYGBge3Igd2FybmluZz1GQUxTRSwgbWVzc2FnZT1GQUxTRSwgZXJyb3I9RkFMU0V9CmdsaW1wc2UobGlua3NfbGlzdGFzX29yZ2FvcykKYGBgCgpgYGB7ciB3YXJuaW5nPUZBTFNFLCBtZXNzYWdlPUZBTFNFLCBlcnJvcj1GQUxTRX0KZ2xpbXBzZShleHBlcmltZW50b19kZV9hdmFsaWFjYW8pCmBgYAoKQ2FsY3VsYW5kbyB0YW1hbmhvIGRlIHJlY2xhbWHDp8O1ZXMgZSBkZSB0w610dWxvcwoKYGBge3Igd2FybmluZz1GQUxTRSwgbWVzc2FnZT1GQUxTRSwgZXJyb3I9RkFMU0V9CnJlY2xhbWFjb2VzX3JhdyR0YW1fdGl0dWxvID0gbmNoYXIocmVjbGFtYWNvZXNfcmF3JHRpdHVsbykKcmVjbGFtYWNvZXNfcmF3JHRhbV9yZWNsYW1hY2FvID0gbmNoYXIocmVjbGFtYWNvZXNfcmF3JHJlY2xhbWFjYW8pCmBgYAoKQ2FsY3VsYW5kbyBxdWFudGlkYWRlIGRlIHBhbGF2cmFzCgpgYGB7ciB3YXJuaW5nPUZBTFNFLCBtZXNzYWdlPUZBTFNFLCBlcnJvcj1GQUxTRX0KcmVjbGFtYWNvZXNfcmF3JG5fd29yZHMgPSBzdHJfY291bnQocmVjbGFtYWNvZXNfcmF3JHJlY2xhbWFjYW8sJ1xcdysnKQpgYGAKCkNhbGN1bGFuZG8gcXVhbnRpZGFkZSBkZSBwYWxhdnJhcyBlbSBjYWl4YSBhbHRhCgpgYGB7ciB3YXJuaW5nPUZBTFNFLCBtZXNzYWdlPUZBTFNFLCBlcnJvcj1GQUxTRX0KcmVjbGFtYWNvZXNfcmF3JG5fdXBwZXJ3b3JkcyA9IDAKTl9VUFBFUldPUkRTX0NPTF9JTkRFWCA9IGdyZXAoIl5uX3VwcGVyd29yZHMkIiwgY29sbmFtZXMocmVjbGFtYWNvZXNfcmF3KSkKUkVDTEFNQUNBT19DT0xfSU5ERVggPSBncmVwKCJecmVjbGFtYWNhbyQiLCBjb2xuYW1lcyhyZWNsYW1hY29lc19yYXcpKQoKZm9yIChpIGluIDE6TlJPVyhyZWNsYW1hY29lc19yYXcpKSB7CiAgICB2ID0gc3RyX3JlcGxhY2VfYWxsKHJlY2xhbWFjb2VzX3Jhd1tpLFJFQ0xBTUFDQU9fQ09MX0lOREVYXSwgIlteWzphbG51bTpdXSIsICIgIikKICAgIHJlY2xhbWFjb2VzX3Jhd1tpLE5fVVBQRVJXT1JEU19DT0xfSU5ERVhdID0gc3RyX2NvdW50KHYsICJcXGJbQS1aXXsyLH1cXGIiKQp9CmBgYAoKYGBge3J9CgpyZWNsYW1hY29lc19yYXckbm9tZV9vcmdhbyA9IDAKTElOS19DT0xfSU5ERVggPSBncmVwKCJebGluayQiLCBjb2xuYW1lcyhyZWNsYW1hY29lc19yYXcpKQpPUkdBT19DT0xfSU5ERVggPSBncmVwKCJebm9tZV9vcmdhbyQiLCBjb2xuYW1lcyhyZWNsYW1hY29lc19yYXcpKQoKZm9yIChpIGluIDE6TlJPVyhyZWNsYW1hY29lc19yYXcpKSB7CiAgICBsaW5rID0gc3RyX3JlcGxhY2VfYWxsKHJlY2xhbWFjb2VzX3Jhd1tpLCBMSU5LX0NPTF9JTkRFWF0sICIvIiwgIlNMSUNFIikKICAgIGxpbmsgPSBzdHJfcmVwbGFjZV9hbGwobGluaywgIi0iLCAiVU5ERVJMSU5FIikKICAgIGxpbmsgPSBzdHJfcmVwbGFjZV9hbGwobGluaywgIlteWzphbG51bTpdXSIsICImIikKICAgIGxpbmsgPSBzdHJfcmVwbGFjZV9hbGwocmVjbGFtYWNvZXNfcmF3W2ksIExJTktfQ09MX0lOREVYXSwgIlNMSUNFIiwgIi8iKQogICAgcmVjbGFtYWNvZXNfcmF3W2ksIE9SR0FPX0NPTF9JTkRFWF0gPSBsaW5rCiAgICAjcmVjbGFtYWNvZXNfcmF3W2ksIE9SR0FPX0NPTF9JTkRFWF0gPSBzdHJzcGxpdChyZWNsYW1hY29lc19yYXckbm9tZV9vcmdhbywgIi8iKQp9CgpwZWdhX25vbWUgPSBmdW5jdGlvbihsaW5rKSB7CiAgICB2ID0gc3Ryc3BsaXQobGluaywgIi8iKQogICAgcmV0dXJuKHZbWzFdXVs1XSkKfQoKcmVjbGFtYWNvZXNfcmF3JG5vbWVfb3JnYW8gPSBzYXBwbHkocmVjbGFtYWNvZXNfcmF3JG5vbWVfb3JnYW8sIHBlZ2Ffbm9tZSkKYGBgCgoKIyMgQW7DoWxpc2UgZG9zIGRhZG9zIGRlIHZhbGlkYcOnw6NvCg==</div>
 
 
 
