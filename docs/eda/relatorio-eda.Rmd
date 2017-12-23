@@ -1,9 +1,21 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "Análise exploratória de dados"
+author: "Gabriela Motta, Italo Medeiros, Rafaela Lacerda"
+date: "22 de dezembro de 2017"
+output:
+  html_document:
+    toc: true
+    theme: journal
+    toc_depth: 6
+    toc_float:
+      collapsed: false
+theme: united
+highlight: tango
+css: styles.css
 ---
 
-```{r warning=FALSE, message=FALSE, error=FALSE}
+
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
 library(tidyverse)
 library(readr)
 library(tm)
@@ -13,9 +25,7 @@ library(stringr)
 
 # Análises descritiva de dados
 
-## Preparando dados das reclamações
-
-```{r warning=FALSE, message=FALSE, error=FALSE}
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
 links_listas_orgaos <- read_csv("../../data/reclamacoes-raw/links-listas-orgaos.csv")
 reclamacoes_raw <- read_csv("../../data/reclamacoes-raw/reclamacoes-raw.csv")
 experimento_de_avaliacao <- read_csv("../../data/experimento-avaliacao-humana/experimento-de-avaliacao-tds.csv")
@@ -24,34 +34,35 @@ amostra_tds_reclamacoes <- read_csv("../../data/experimento-avaliacao-humana/amo
 
 Olhando rapidamente a estrutura dos dados
 
-```{r warning=FALSE, message=FALSE, error=FALSE}
+
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
 glimpse(reclamacoes_raw)
 ```
 
-```{r warning=FALSE, message=FALSE, error=FALSE}
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
 glimpse(links_listas_orgaos)
 ```
 
-```{r warning=FALSE, message=FALSE, error=FALSE}
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
 glimpse(experimento_de_avaliacao)
 ```
 
-Calculando tamanho de reclamações e de títulos
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
+# Calculando tamanho de reclamações e de títulos
 
-```{r warning=FALSE, message=FALSE, error=FALSE}
 reclamacoes_raw$tam_titulo = nchar(reclamacoes_raw$titulo)
 reclamacoes_raw$tam_reclamacao = nchar(reclamacoes_raw$reclamacao)
 ```
 
-Calculando quantidade de palavras
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
+# Calculando quantidade de palavras
 
-```{r warning=FALSE, message=FALSE, error=FALSE}
 reclamacoes_raw$n_words = str_count(reclamacoes_raw$reclamacao,'\\w+')
 ```
 
-Calculando quantidade de palavras em caixa alta
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
+# Calculando quantidade de palavras em caixa alta
 
-```{r warning=FALSE, message=FALSE, error=FALSE}
 reclamacoes_raw$n_upperwords = 0
 N_UPPERWORDS_COL_INDEX = grep("^n_upperwords$", colnames(reclamacoes_raw))
 RECLAMACAO_COL_INDEX = grep("^reclamacao$", colnames(reclamacoes_raw))
@@ -62,9 +73,8 @@ for (i in 1:NROW(reclamacoes_raw)) {
 }
 ```
 
-Extraindo nome de órgão
-
-```{r}
+```{r echo=FALSE}
+# Extraindo nome de órgão
 
 reclamacoes_raw$nome_orgao = 0
 LINK_COL_INDEX = grep("^link$", colnames(reclamacoes_raw))
@@ -87,12 +97,22 @@ pega_nome = function(link) {
 reclamacoes_raw$nome_orgao = sapply(reclamacoes_raw$nome_orgao, pega_nome)
 ```
 
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
+# reclamacoes_raw <- reclamacoes_raw %>% 
+#     mutate(
+#         comprimento_reclamacao = str_length(reclamacao), 
+#         nome_orgao = str_split(link, "/") %>% map_chr(~ .[[5]])
+#         )
+```
+
 
 ## Análise dos dados
 
-Boxplot do tamanho da reclamação (num de chars)
+Abaixo, geramos algumas visualizações que nos ajudarão a melhor compreender o comportamento de algumas variáveis de interesse das nossas bases de dados:
 
-```{r warning=FALSE, message=FALSE, error=FALSE}
+### Boxplot do tamanho da reclamação (num de chars)
+
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
 reclamacoes_raw %>%
     ggplot() +
     geom_jitter(aes(x=0, y=tam_reclamacao), color = "orange1", width = .3, size = 1, alpha = .5) +
@@ -108,9 +128,11 @@ reclamacoes_raw %>%
     theme(legend.position = "none")
 ```
 
-Boxplot do tamanho da reclamação (num de palavras)
+Nessa distribuição podemos observar que, geralmente, a quantidade de caracteres em uma reclamação está entre 0 e 5000 caracteres. Porém, existem casos em que esse número é bem mais alto, chegando a um máximo de quase 19000 caracteres.
 
-```{r warning=FALSE, message=FALSE, error=FALSE}
+### Boxplot do tamanho da reclamação (num de palavras)
+
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
 reclamacoes_raw %>%
     ggplot() +
     geom_jitter(aes(x=0, y=n_words), color = "orange1", width = .3, size = 1, alpha = .5) +
@@ -126,9 +148,11 @@ reclamacoes_raw %>%
     theme(legend.position = "none")
 ```
 
-Boxplot da quantidade palavras em caixa alta
+Nessa distribuição observamos que a grande maioria das reclamações possuem entre 0 e 500 palavras. Porém, existem algumas que são mais extensas, alcançando um máximo de aproximadamente 3200 palavras
 
-```{r warning=FALSE, message=FALSE, error=FALSE}
+### Boxplot da quantidade palavras em caixa alta
+
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
 reclamacoes_raw %>%
     ggplot() +
     geom_jitter(aes(x=0, y=n_upperwords), color = "orange1", width = .3, size = 1, alpha = .5) +
@@ -143,9 +167,11 @@ reclamacoes_raw %>%
     theme(legend.position = "none")
 ```
 
-Boxplot do tamanho da reclamação (num de palavras) por órgão
+A partir dessa distribuição podemos observar que o número de palavras em caixa alta geralmente é baixo, entre 0 e 25. Porém, existem casos em que esse número se amplia drasticamente, chegando a mais de 150 palavras em caixa alta.
 
-```{r warning=FALSE, message=FALSE, error=FALSE, fig.height=10}
+### Boxplot do tamanho da reclamação (num de palavras) por órgão
+
+```{r warning=FALSE, message=FALSE, error=FALSE, fig.height=10, echo=FALSE}
 reclamacoes_raw %>%
     ggplot() +
     geom_jitter(aes(x=0, y=n_words), color = "greenyellow", width = .3, size = 1, alpha = 1) +
@@ -163,9 +189,11 @@ reclamacoes_raw %>%
     theme(legend.position = "none")
 ```
 
-Boxplot da quantidade de palavras em caixa alta por órgão
+Nessa distribuição podemos ver que muitos órgãos recebem reclamações pequenas, como por exemplo a ANVISA que concentra todas as suas reclamações com menos de 200 palavras. O Ministério das Comunicações recebe as maiores reclamações, sendo 25% entre 300 e 600 palavras.
 
-```{r warning=FALSE, message=FALSE, error=FALSE, fig.height=10}
+### Boxplot da quantidade de palavras em caixa alta por órgão
+
+```{r warning=FALSE, message=FALSE, error=FALSE, fig.height=10, echo=FALSE}
 reclamacoes_raw %>%
     ggplot() +
     geom_jitter(aes(x=0, y=n_upperwords), color = "darkblue", width = .3, size = 1, alpha = 1) +
@@ -182,9 +210,9 @@ reclamacoes_raw %>%
     theme(legend.position = "none")
 ```
 
-Boxplot da quantidade de palavras em caixa alta por órgão
+Aqui vemos que o número de palavras em caixa alta por reclamação é baixo, sendo os outliers as reclamações que possuíam todas as palavras em caixa alta. Enquanto a maioria dos órgãos concentra todas as reclamações em uma quantidade de palavras em caixa alta abaixo de 10, o Ministério da Saúde possui 50% das reclamações com cerca de 25 palavras em caixa alta.
 
-```{r warning=FALSE, message=FALSE, error=FALSE}
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
 big_df = amostra_tds_reclamacoes %>% select(id, titulo) %>%
     filter(id %in% experimento_de_avaliacao$id_reclamação) %>%
     left_join(experimento_de_avaliacao, by=c('id' = 'id_reclamação')) %>%
@@ -192,9 +220,9 @@ big_df = amostra_tds_reclamacoes %>% select(id, titulo) %>%
     left_join(reclamacoes_raw, by=c('titulo' = 'titulo'))
 ```
 
-Mediana da insatisfação por reclamação
+### Mediana da insatisfação por reclamação
 
-```{r warning=FALSE, message=FALSE, error=FALSE}
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
 mediana_insatisfacao = big_df %>%
     group_by(id) %>%
     summarise(mediana_ins = median(insatisfação))
@@ -212,9 +240,13 @@ mediana_insatisfacao %>%
     theme(legend.position = "none")
 ```
 
-Distribuição do valor da insatisfação por órgão
+A partir do gráfico, podemos concluir que mais de 50% das reclamações teve uma mediana entre 3 e 5. Mostrando que, geralmente há um nível considerável de insatisfação entre as reclamações.
+Além disso, nota-se que nas reclamações cuja mediana foi 5, os avaliadores deram nota máxima em, pelo menos, 50% das reclamações. Analogamente, podemos afirmar que naquelas em que a mediana foi 1, pelo menos, 50% dos avaliadores deram nota mínima.
 
-```{r warning=FALSE, message=FALSE, error=FALSE, fig.height=10}
+
+### Distribuição do valor da insatisfação por órgão
+
+```{r warning=FALSE, message=FALSE, error=FALSE, fig.height=10, echo=FALSE}
 big_df %>%
     ggplot() +
     geom_jitter(aes(x=0, y=insatisfação), color = "darkblue", width = .3, size = 1, alpha = 1) +
@@ -231,29 +263,4 @@ big_df %>%
     theme(legend.position = "none")
 ```
 
-```{r warning=FALSE, message=FALSE, error=FALSE}
-
-```
-
-
-
-
-
-
-
-
-
-Outro modo de pegar o nome do orgao:
-```{r warning=FALSE, message=FALSE, error=FALSE}
-reclamacoes_raw <- reclamacoes_raw %>% 
-    mutate(
-        comprimento_reclamacao = str_length(reclamacao), 
-        nome_orgao = str_split(link, "/") %>% map_chr(~ .[[5]])
-        )
-```
-
-
-
-```{r warning=FALSE, message=FALSE, error=FALSE}
-
-```
+Nestes gráficos podemos perceber que alguns órgãos concentram reclamações em torno de um certo grau de insatisfação, como é o caso do Ministério da Saúde que possui 50% das reclamações de grau 5. O Ministério da Fazenda chama a atenção por concentrar quase todos os valores no grau 3. A Agência Nacional de Petróleo, Gás Natural e Biocombustível possui os dados mais uniformes, sendo 50% entre 1 e 3, e 50% entre 3 e 5.
