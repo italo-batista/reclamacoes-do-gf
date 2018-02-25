@@ -3,7 +3,7 @@ title: "Análise da precisão"
 output: html_notebook
 ---
 
-```{r}
+```{r warning=FALSE, message=FALSE, error=FALSE}
 library(tidyverse)
 library(here)
 library(modelr)
@@ -14,20 +14,43 @@ theme_set(theme_bw())
 
 ## Os dados
 
-```{r carrega}
+```{r warning=FALSE, message=FALSE, error=FALSE}
 reclamacoes_raw = read_csv(here("data/reclamacoes-raw/reclamacoes-raw.csv"))
 avaliacoes_raw = read_csv(here("data/avaliacoes/avaliacoes-20180222.csv"))
 sentimentos = read_csv(here("data/sentimentos/sentimento.csv"))
+```
+
+```{r warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
+calc_n_upperwords = function(reclamacao) {
+    words = str_replace_all(reclamacao, "[^[:alnum:]]", " ")
+    n_upperwords = str_count(words, "\\b[A-Z]{2,}\\b")
+    return(n_upperwords)
+}
 
 reclamacoes_raw = reclamacoes_raw %>% 
     mutate(id = 1:n(), 
            comprimento_reclamacao = str_length(reclamacao), 
-           nome_orgao = str_split(link, "/") %>% map_chr(~ .[[5]]))
+           nome_orgao = str_split(link, "/") %>% map_chr(~ .[[5]]),
+           n_upperwords = sapply(reclamacao, calc_n_upperwords))
+
+stopwords = stopwords("pt")
+palavra_a_palavra = reclamacoes_raw %>%
+    select(id, reclamacao) %>% 
+    unnest_tokens(word, reclamacao) %>%
+    filter(! word %in% stopwords) %>%
+    mutate(word = tolower(word)) %>%
+    group_by(id) %>%
+    summarise(s_stopwords = n())
+
+reclamacoes_raw = reclamacoes_raw %>% 
+  left_join(palavra_a_palavra, by = c("id" = "id")) 
+
+reclamacoes_raw$n_stopwords = reclamacoes_raw$comprimento_reclamacao - reclamacoes_raw$s_stopwords
 ```
 
 `reclamacoes_l` tem um formato long em vez de wide (explicado [aqui](https://sejdemyr.github.io/r-tutorials/basics/wide-and-long/)).
 
-```{r junta}
+```{r warning=FALSE, message=FALSE, error=FALSE}
 avaliacoes = avaliacoes_raw %>% 
     group_by(id_reclamação) %>% 
     summarise(insatisfação = median(insatisfação), 
@@ -47,18 +70,20 @@ reclamacoes_l = reclamacoes %>%
 
 Converte polaridades para escala 0-5
 
-```{r}
-# Faça você mesmo. Crie a variável polaridade_normalizada
-# reclamacoes_l = reclamacoes_l %>% 
-#     group_by(lexico) %>% 
-#     mutate(polaridade_normalizada = ALGOAQUI)
+```{r warning=FALSE, message=FALSE, error=FALSE}
+reclamacoes_l = reclamacoes_l %>%
+    group_by(lexico) %>%
+    mutate(polaridade_normalizada = round(
+        (polaridade-min(polaridade))/(max(polaridade)-min(polaridade)) * 5,
+        digits=2
+    )) 
 ```
 
 Calcula o erro por reclamação
 
-```{r}
+```{r warning=FALSE, message=FALSE, error=FALSE}
 reclamacoes_l = reclamacoes_l %>% 
-    mutate(erro = (insatisfação - polaridade_normalizada)**2)
+    mutate(erro = sqrt((insatisfação - polaridade_normalizada)**2))
 ```
 
 
@@ -69,20 +94,19 @@ Inicial. Faça os gráficos a mais que achar necessário para entender os dados 
 ```{r}
 reclamacoes %>% 
     ggplot(aes(x = sentimento_op30, y = sentimento_sent)) + 
-    geom_abline(slope = 1, intercept = 0, color = "grey") + 
+    geom_abline(slope = 1, intercept = -1, color = "grey") +
     geom_count(alpha = .7) 
 ```
 
 ```{r}
-reclamacoes_l %>% 
-    ggplot(aes(x = insatisfação, y = polaridade_normalizada, group = insatisfação)) + 
-    geom_jitter(alpha = .7)  + 
+reclamacoes_l %>%
+    ggplot(aes(x = insatisfação, y = polaridade_normalizada, group = insatisfação)) +
+    geom_jitter(alpha = .7)  +
     facet_wrap(~ lexico)
 
 reclamacoes_l %>% 
     ggplot(aes(x = insatisfação, y = erro, group = insatisfação)) + 
     geom_jitter(alpha = .5)  +
-    # geom_boxplo() + 
     facet_wrap(~ lexico)
 ```
 
@@ -92,7 +116,11 @@ reclamacoes_l %>%
 Agora um modelo para responder sua pergunta.
 
 ```{r}
+modelo = lm(erro ~ n_stopwords + n_upperwords, data = reclamacoes_l)
 
+tidy(modelo, conf.int = TRUE, conf.level = 0.95)
+glance(modelo)
+plot(modelo)
 ```
 
 **Dica** - o texto de resultado que queremos produzir é algo como: 
