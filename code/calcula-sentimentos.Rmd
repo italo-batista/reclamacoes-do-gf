@@ -72,9 +72,11 @@ Agora de fato calculamos qual a polaridade acumulada (via somatório) de cada re
 ```{r calcula_sentimentos}
 sentimentos = palavras_com_sentimento %>% 
     group_by(id) %>%
-    summarise(sentimento_op30 = sum(op30_tf_idf, na.rm = TRUE),
+    summarise(sentimento_op30_tf_idf = sum(op30_tf_idf, na.rm = TRUE),
+              sentimento_op30 = sum(op30, na.rm = TRUE),
               palavras_op30 = sum(!is.na(op30)),
-              sentimento_sent = sum(sent_tf_idf, na.rm = TRUE), 
+              sentimento_sent_tf_idf = sum(sent_tf_idf, na.rm = TRUE), 
+              sentimento_sent = sum(sent, na.rm = TRUE), 
               palavras_sent = sum(!is.na(sent)),
               palavras = n())
 

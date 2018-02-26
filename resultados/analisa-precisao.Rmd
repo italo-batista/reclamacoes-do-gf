@@ -8,7 +8,8 @@ library(tidyverse)
 library(here)
 library(modelr)
 library(broom)
-
+library(tm)
+library(tidytext)
 theme_set(theme_bw())
 ```
 
@@ -66,6 +67,9 @@ reclamacoes_l = reclamacoes %>%
            value = "polaridade", 
            sentimento_op30, sentimento_sent)
 
+reclamacoes_l = reclamacoes_l %>%
+    mutate(lexico_id = ifelse(lexico == "sentimento_op30", 0, 1))
+
 ```
 
 Converte polaridades para escala 0-5
@@ -94,7 +98,7 @@ Inicial. Faça os gráficos a mais que achar necessário para entender os dados 
 ```{r}
 reclamacoes %>% 
     ggplot(aes(x = sentimento_op30, y = sentimento_sent)) + 
-    geom_abline(slope = 1, intercept = -1, color = "grey") +
+    geom_abline(slope = 0.5, intercept = -0.5, color = "grey") +
     geom_count(alpha = .7) 
 ```
 
@@ -106,7 +110,7 @@ reclamacoes_l %>%
 
 reclamacoes_l %>% 
     ggplot(aes(x = insatisfação, y = erro, group = insatisfação)) + 
-    geom_jitter(alpha = .5)  +
+    geom_jitter(alpha = .5, width = .04, height = .04)  +
     facet_wrap(~ lexico)
 ```
 
@@ -120,7 +124,7 @@ modelo = lm(erro ~ n_stopwords + n_upperwords, data = reclamacoes_l)
 
 tidy(modelo, conf.int = TRUE, conf.level = 0.95)
 glance(modelo)
-plot(modelo)
+#plot(modelo)
 ```
 
 **Dica** - o texto de resultado que queremos produzir é algo como: 
