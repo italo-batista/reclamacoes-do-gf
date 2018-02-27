@@ -46,9 +46,10 @@ stopwords = stopwords("pt")
 
 palavra_a_palavra = reclamacoes %>% 
     select(id, reclamacao) %>% 
-    unnest_tokens(termo, reclamacao) %>%
+    unnest_tokens(termo, reclamacao, to_lower = FALSE) %>%
     filter(! termo %in% stopwords) %>%
     count(id, termo) %>%
+    mutate(is_lower = termo == tolower(termo)) %>%
     ungroup()
 
 total_words = palavra_a_palavra %>% group_by(id) %>% summarize(total = sum(n))
@@ -61,8 +62,10 @@ palavras_com_sentimento = palavra_a_palavra %>%
     left_join(op30 %>% select(term, op30 = polarity), by = c("termo" = "term")) %>% 
     left_join(sent %>% select(term, sent = polarity), by = c("termo" = "term")) %>%
     mutate(
-        op30_tf_idf = op30 * tf_idf,
-        sent_tf_idf = sent * tf_idf
+        op30_tf_idf = ifelse(is_lower, op30 * tf_idf, 2 * op30 * tf_idf),
+        sent_tf_idf = ifelse(is_lower, sent * tf_idf, 2 * sent * tf_idf),
+        op30 = ifelse(is_lower, op30 * n, op30 * n * 2),
+        sent = ifelse(is_lower, sent * n, sent * n * 2)
     )
 ```
 

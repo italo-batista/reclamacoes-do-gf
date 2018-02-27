@@ -104,7 +104,7 @@ reclamacoes %>%
 
 ```{r}
 reclamacoes_l %>%
-    ggplot(aes(x = insatisfação, y = polaridade_normalizada, group = insatisfação)) +
+    ggplot(aes(x = n_upperwords, y = erro, group = n_upperwords)) +
     geom_jitter(alpha = .7)  +
     facet_wrap(~ lexico)
 
@@ -120,7 +120,7 @@ reclamacoes_l %>%
 Agora um modelo para responder sua pergunta.
 
 ```{r}
-modelo = lm(erro ~ n_stopwords + n_upperwords, data = reclamacoes_l)
+modelo = lm(erro ~ insatisfação + lexico_id, data = reclamacoes_l)
 
 tidy(modelo, conf.int = TRUE, conf.level = 0.95)
 glance(modelo)
