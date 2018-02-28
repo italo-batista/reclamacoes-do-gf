@@ -10,3 +10,4 @@ O código é em R. Rode:
 deps = c("tidyverse", "rvest", "stringr")
 install.packages(deps)
 ```
+
