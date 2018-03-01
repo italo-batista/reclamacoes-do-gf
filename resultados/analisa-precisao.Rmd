@@ -164,3 +164,7 @@ Dentre outros ...
 Também tentamos usar TF-IDF para gerar pesos para as palavras de cada reclamação e utilizar esse peso ponderado como fator para calcular, junto ao léxico, a significância do sentimento da palavra.  
 Todas essas abordagens levaram a resultados poucos significativos (ou um R² abaixo de 10% ou modelos com muitas variáveis cujo estimativa não era conclusiva / significante).  
 Por fim, para o cálculo do sentimento, fizemos o seguinte ajuste: uma palavra em caixa alta tem um sentimento maior (o dobro) que outras (seja o sentimento positivo ou negativo). O código para esse cálculo fizemos no outro script fornecido pelo professor (~/code/calcula-sentimentos.Rmd). Essa abordagem tem alguns problemas, mas foi a melhor encontrada pelo grupo
+
+**
+
+A conclusão pode ser então que na verdade nenhuma variável parece ser interessante para estimar o erro. E quando analisá-se um conjunto de variáveis, o modelo explica praticamente 0. O modelo pode estar errando tbm.
